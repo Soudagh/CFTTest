@@ -40,7 +40,9 @@ class LaunchViewModel(val database: AppDatabase) : ViewModel() {
                                 registeredAge = user.registered.age,
                                 login = user.login.username,
                                 name = "${user.name.first} ${user.name.last}",
-                                picture = user.picture.large
+                                picture = user.picture.large,
+                                longitude = user.location.coordinates.longitude,
+                                latitude = user.location.coordinates.latitude
                             )
                         )
                     }

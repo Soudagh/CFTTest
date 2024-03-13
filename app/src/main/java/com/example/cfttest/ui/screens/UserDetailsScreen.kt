@@ -1,5 +1,6 @@
 package com.example.cfttest.ui.screens
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -11,14 +12,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.cfttest.domain.models.UserInfoViewModel
 import com.example.cfttest.ui.components.InfoRow
+import com.example.cfttest.ui.utils.dial
+import com.example.cfttest.ui.utils.map
+import com.example.cfttest.ui.utils.sendMail
 
 @Composable
 fun UserDetailsScreen(userInfoViewModel: UserInfoViewModel) {
     val user = userInfoViewModel.userInfo!!
+    val context = LocalContext.current
 
     Column(
         modifier = Modifier
@@ -41,9 +48,24 @@ fun UserDetailsScreen(userInfoViewModel: UserInfoViewModel) {
             InfoRow(title = "Full name", description = user.name)
         }
         InfoRow(title = "Gender", description = user.gender)
-        InfoRow(title = "Email", description = user.email)
-        InfoRow(title = "Phone", description = user.phone)
-        InfoRow(title = "Cell", description = user.cell)
+        InfoRow(
+            modifier = Modifier.clickable { context.sendMail(to = user.email, subject = "") },
+            title = "Email",
+            description = user.email,
+            textColor = Color.Blue
+        )
+        InfoRow(
+            modifier = Modifier.clickable { context.dial(user.phone) },
+            title = "Phone",
+            description = user.phone,
+            textColor = Color.Blue
+        )
+        InfoRow(
+            modifier = Modifier.clickable { context.dial(user.cell) },
+            title = "Cell",
+            description = user.cell,
+            textColor = Color.Blue
+        )
         InfoRow(title = "Id", description = user.id)
         InfoRow(title = "Nationality", description = user.nat)
         InfoRow(title = "Date of Birth", description = user.dob)
@@ -51,6 +73,11 @@ fun UserDetailsScreen(userInfoViewModel: UserInfoViewModel) {
         InfoRow(title = "Registered", description = user.registered)
         InfoRow(title = "Registered Age", description = user.registeredAge.toString())
         InfoRow(title = "Login", description = user.login)
-        InfoRow(title = "Location", description = user.location)
+        InfoRow(modifier = Modifier.clickable {
+            context.map(
+                longitude = user.longitude,
+                latitude = user.latitude
+            )
+        }, title = "Location", description = user.location, textColor = Color.Blue)
     }
 }

@@ -24,7 +24,6 @@ fun UsersListScreen(
     usersViewModel: UsersViewModel
 ) {
     val users = usersViewModel.users
-
     LazyColumn(
         modifier = Modifier
         .fillMaxSize()

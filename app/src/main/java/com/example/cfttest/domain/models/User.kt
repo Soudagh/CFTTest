@@ -9,6 +9,8 @@ data class User(
     @PrimaryKey val uid: Int,
     @ColumnInfo(name = "gender") val gender: String,
     @ColumnInfo(name = "location") val location: String,
+    @ColumnInfo(name = "longitude") val longitude: String,
+    @ColumnInfo(name = "latitude") val latitude: String,
     @ColumnInfo(name = "name") val name: String,
     @ColumnInfo(name = "email") val email: String,
     @ColumnInfo(name = "login") val login: String,

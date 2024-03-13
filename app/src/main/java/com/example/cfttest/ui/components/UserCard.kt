@@ -81,7 +81,9 @@ fun UserCardPreview() {
             age = 5,
             uid = 2,
             registeredAge = 4,
-            nat = "RU"
+            nat = "RU",
+            latitude = "asf",
+            longitude = "saf"
         )
     )
 }
